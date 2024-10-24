@@ -1,0 +1,114 @@
+<div class="min-h-screen bg-gradient-to-br flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8 p-10 rounded-xl shadow-md backdrop-filter backdrop-blur-sm bg-opacity-30 bg-white border border-gray-200">
+    <div>
+      <h1 class="font-roboto font-bold text-3xl md:text-4xl text-center text-gray-400">
+        Register CinemaHub
+      </h1>
+      <p class="mt-2 text-center text-sm text-gray-500">Join our community of movie lovers</p>
+    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="mt-8 space-y-6">
+      <!-- Name field -->
+      <div>
+        <label for="name" class="block text-sm font-medium text-white">Full Name</label>
+        <div class="mt-1 relative rounded-md shadow-sm">
+          <input type="text" formControlName="name" id="name" 
+                 class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white bg-opacity-20 text-white"
+                 [ngClass]="{'border-red-500': registerForm.get('name')?.errors && registerForm.get('name')?.touched}"
+                 placeholder="Joe Doe" spellcheck="false" autocomplete="off" />
+        </div>
+        <ng-container *ngIf="registerForm.get('name')?.touched">
+          <p *ngIf="registerForm.get('name')?.hasError('required')" class="mt-2 text-sm text-red-300">Name is required</p>
+          <p *ngIf="registerForm.get('name')?.errors && !registerForm.get('name')?.hasError('required')" class="mt-2 text-sm text-red-300">
+            {{registerForm.get('name')?.errors?.['message']}}
+          </p>
+        </ng-container>
+      </div>
+
+      <!-- Phone number field -->
+      <div>
+        <label for="phoneNumber" class="block text-sm font-medium text-white">Phone Number</label>
+        <div class="mt-1 relative rounded-md shadow-sm">
+          <input type="tel" formControlName="phoneNumber" id="phoneNumber" 
+                 class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white bg-opacity-20 text-white"
+                 [ngClass]="{'border-red-500': registerForm.get('phoneNumber')?.errors && registerForm.get('phoneNumber')?.touched}"
+                 placeholder="123-456-7890" />
+        </div>
+        <ng-container *ngIf="registerForm.get('phoneNumber')?.touched">
+          <p *ngIf="registerForm.get('phoneNumber')?.hasError('required')" class="mt-2 text-sm text-red-300">Phone number is required</p>
+          <p *ngIf="registerForm.get('phoneNumber')?.errors && !registerForm.get('phoneNumber')?.hasError('required')" class="mt-2 text-sm text-red-300">
+            {{registerForm.get('phoneNumber')?.errors?.['message']}}
+          </p>
+        </ng-container>
+      </div>
+
+      <!-- Email field -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-white">Email Address</label>
+        <div class="mt-1 relative rounded-md shadow-sm">
+          <input type="email" formControlName="email" id="email" 
+                 class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white bg-opacity-20 text-white"
+                 [ngClass]="{'border-red-500': registerForm.get('email')?.errors && registerForm.get('email')?.touched}"
+                 placeholder="example@gmail.com" spellcheck="false" autocomplete="off" />
+        </div>
+        <ng-container *ngIf="registerForm.get('email')?.touched">
+          <p *ngIf="registerForm.get('email')?.hasError('required')" class="mt-2 text-sm text-red-300">Email is required</p>
+          <p *ngIf="registerForm.get('email')?.errors && !registerForm.get('email')?.hasError('required')" class="mt-2 text-sm text-red-300">
+            {{registerForm.get('email')?.errors?.['message']}}
+          </p>
+        </ng-container>
+      </div>
+
+      <!-- Password field -->
+      <div>
+        <label for="password" class="block text-sm font-medium text-white">Password</label>
+        <div class="mt-1 relative rounded-md shadow-sm">
+          <input [type]="toggleShowHidePassword ? 'text' : 'password'" formControlName="password" id="password" 
+                 class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white bg-opacity-20 text-white"
+                 [ngClass]="{'border-red-500': registerForm.get('password')?.errors && registerForm.get('password')?.touched}"
+                 placeholder="Enter your password" autocomplete="new-password" />
+          <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+            <button type="button" (click)="togglePasswordVisibility(true)" class="focus:outline-none">
+              <svg *ngIf="!toggleShowHidePassword" class="h-5 w-5 text-gray-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+              </svg>
+              <svg *ngIf="toggleShowHidePassword" class="h-5 w-5 text-gray-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" />
+                <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <ng-container *ngIf="registerForm.get('password')?.touched">
+          <p *ngIf="registerForm.get('password')?.hasError('required')" class="mt-2 text-sm text-red-300">Password is required</p>
+          <p *ngIf="registerForm.get('password')?.errors && !registerForm.get('password')?.hasError('required')" class="mt-2 text-sm text-red-300">
+            {{registerForm.get('password')?.errors?.['message']}}
+          </p>
+        </ng-container>
+      </div>
+
+      <!-- Confirm Password field -->
+      <div>
+        <label for="confirmPassword" class="block text-sm font-medium text-white">Confirm Password</label>
+        <div class="mt-1 relative rounded-md shadow-sm">
+          <input [type]="toggleShowHidePassword ? 'text' : 'password'" formControlName="confirmPassword" id="confirmPassword" 
+                 class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white bg-opacity-20 text-white"
+                 [ngClass]="{'border-red-500': registerForm.get('confirmPassword')?.errors && registerForm.get('confirmPassword')?.touched}"
+                 placeholder="Confirm your password" autocomplete="new-password" />
+        </div>
+        <ng-container *ngIf="registerForm.get('confirmPassword')?.touched">
+          <p *ngIf="registerForm.get('confirmPassword')?.hasError('required')" class="mt-2 text-sm text-red-300">Confirm password is required</p>
+          <p *ngIf="registerForm.get('confirmPassword')?.errors && !registerForm.get('confirmPassword')?.hasError('required')" class="mt-2 text-sm text-red-300">
+            {{registerForm.get('confirmPassword')?.errors?.['message']}}
+          </p>
+        </ng-container>
+      </div>
+
+      <div>
+        <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          Register
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

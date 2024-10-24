@@ -1,0 +1,23 @@
+.animation-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+  }
+
+  #cursorCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  #typingText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+  }
