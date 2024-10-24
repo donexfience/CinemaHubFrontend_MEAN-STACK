@@ -82,13 +82,16 @@ export class RegisterFormComponent {
     });
   }
   async onSubmit(): Promise<void> {
+    console.log('Before trim:', this.registerForm.value);
     this.trimAllWhiteSpaces();
+    console.log('After trim:', this.registerForm.value);
     if (this.registerForm.invalid || this.isFormSubmitted) {
-      return this.registerForm.markAllAsTouched();
+      this.registerForm.markAllAsTouched();
+      return;
     }
     this.isFormSubmitted = true;
-    const userRegisterCredentails: IUserRegisterCredentials =
-      this.registerForm.value;
-      console.log(userRegisterCredentails);
+    const userRegisterCredentails: IUserRegisterCredentials = this.registerForm.value;
+    console.log(userRegisterCredentails);
+ 
   }
 }
